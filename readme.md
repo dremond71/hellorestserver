@@ -33,3 +33,34 @@ Got MySQL running in a Docker container by following https://github.com/emonddr/
 # Misc
 
 Turns out the Docker command `docker-machine ip default` to find the IP Address of the Docker daemon in Windows 10 is no longer shipped with Docker Desktop. In MySQL WorkBench, I can use `localhost` instead of an IP Address when trying to connect to MySQL running in a Docker container.
+
+# Run hellorestserver
+
+```sh
+set MYSQL_USER=root 
+set MYSQL_PASSWORD=my-secret-pw
+set MYSQL_HOST=mysqldb
+set MYSQL_PORT=3306
+go run .
+```
+
+# Using docker-compose
+
+## Build hellorestserver:localdev container
+
+```sh
+docker build -t hellorestserver:localdev .
+```
+
+## Starting hellorestserver and mysqldb
+
+```sh
+docker-compose up -d --no-recreate
+```
+
+## Stopping and Starting the services separately
+
+```sh
+docker-compose stop mysqldb 
+docker-compose start hellorestserver
+```

@@ -1,0 +1,24 @@
+version: '3.1'
+services:
+  mysqldb:
+    image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: test_db
+    ports:
+      - "3306:3306"
+
+  hellorestserver:
+    image: hellorestserver:localdev
+    depends_on:
+      - 'mysqldb'
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=my-secret-pw
+      - MYSQL_HOST=mysqldb
+      - MYSQL_PORT=3306      
