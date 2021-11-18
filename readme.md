@@ -17,50 +17,39 @@ A simple golang REST API application using
 - [hellorestdatabase](https://github.com/dremond71/hellorestdatabase) ; contains a global variable `var DB *gorm.DB` used by other modules
 - [hellorestbook](https://github.com/dremond71/hellorestbook) ; contains the `Book` struct and its CRUD REST API functions
 
-# MySQL running in a Docker Container
+# Using docker-compose
 
-Got MySQL running in a Docker container by following https://github.com/emonddr/setup_mysql_workbench_docker_mysql.
-(host: localhost, port: 3306)
+## Build hellorestserver:localdev container
+
+```sh
+docker-compose build
+```
+
+## Starting hellorestserver and mysqldb
+
+```sh
+my-docker-compose-up.bat
+```
+
+## Stopping and Starting the services separately
+
+```sh
+my-docker-compose-down.bat
+```
+
+# Call REST API with Postman
+
+Import `hello-rest.postman_collection.json` into Postman.
+
+Play with the various REST API endpoints.
 
 # Useful References
 
 - https://tutorialedge.net/golang/basic-rest-api-go-fiber/
 - https://gorm.io/id_ID/docs/connecting_to_the_database.html
 - https://gorm.io/docs/conventions.html#NamingStrategy
-- https://github.com/emonddr/setup_mysql_workbench_docker_mysql
 - https://medium.com/@pliutau/docker-and-go-modules-4265894f9fc
-
-# Misc
-
-Turns out the Docker command `docker-machine ip default` to find the IP Address of the Docker daemon in Windows 10 is no longer shipped with Docker Desktop. In MySQL WorkBench, I can use `localhost` instead of an IP Address when trying to connect to MySQL running in a Docker container.
-
-# Run hellorestserver
-
-```sh
-set MYSQL_USER=root 
-set MYSQL_PASSWORD=my-secret-pw
-set MYSQL_HOST=mysqldb
-set MYSQL_PORT=3306
-go run .
-```
-
-# Using docker-compose
-
-## Build hellorestserver:localdev container
-
-```sh
-docker build -t hellorestserver:localdev .
-```
-
-## Starting hellorestserver and mysqldb
-
-```sh
-docker-compose up -d --no-recreate
-```
-
-## Stopping and Starting the services separately
-
-```sh
-docker-compose stop mysqldb 
-docker-compose start hellorestserver
-```
+- https://iamvickyav.medium.com/mysql-init-script-on-docker-compose-e53677102e48
+- https://towardsdatascience.com/connect-to-mysql-running-in-docker-container-from-a-local-machine-6d996c574e55
+- https://dev.to/kinshukbasu/setting-up-docker-databases-with-mounted-volumes-kjg
+- https://hub.docker.com/r/ubuntu/mysql

@@ -1,10 +1,11 @@
 version: '3.1'
 services:
   mysqldb:
-    image: mysql/mysql-server:latest
+    image:  ubuntu/mysql:8.0-21.10_beta
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: my-secret-pw
-      MYSQL_DATABASE: test_db
+      MYSQL_ROOT_PASSWORD: My:S3cr3t/
+      MYSQL_DATABASE: testdb
     ports:
       - "3306:3306"
 
@@ -19,6 +20,6 @@ services:
       - 3000:3000
     environment:
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=my-secret-pw
+      - MYSQL_PASSWORD=My:S3cr3t/
       - MYSQL_HOST=mysqldb
       - MYSQL_PORT=3306      
